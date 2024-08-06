@@ -82,6 +82,10 @@ func sync(node : Node, property : String, kuriakuto_resource_name : String) -> v
 	)
 	_kuriakuto_resources[kuriakuto_resource_name].value_changed.connect(callable)
 	_observables[uuid] = callable
+	# Initial value set
+	_kuriakuto_properties[kuriakuto_resource_name].value = _kuriakuto_properties[kuriakuto_resource_name].get_node_value()
+	_kuriakuto_resources[kuriakuto_resource_name] = _kuriakuto_properties[kuriakuto_resource_name]
+
 	
 ## Returns if KuriakutoReactive property (by name) is in sync
 func is_synced(node : Node, property : String, kuriakuto_resource_name : String) -> void:
