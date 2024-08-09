@@ -6,6 +6,7 @@ enum KuriakutoWarns {
 	KURIAKUTO_RESOURCE_DOESNT_EXIST,
 	KURIAKUTO_PROPERTY_DOESNT_EXIST,
 	KURIAKUTO_VALUE_DOESNT_EXIST,
+	KURIAKUTO_COMPUTED_DOESNT_EXIST,
 	KURIAKUTO_OBSERVABLE_DOESNT_EXIST,
 }
 
@@ -17,8 +18,14 @@ var _observables : Dictionary
 
 func _warn(error : KuriakutoWarns, extra : Variant = null) -> void:
 	match error:
+		KuriakutoWarns.KURIAKUTO_RESOURCE_DOESNT_EXIST:
+			push_warning("KResource \"" + extra + "\" does not exist")
 		KuriakutoWarns.KURIAKUTO_PROPERTY_DOESNT_EXIST:
-			push_warning("KReactive \"" + extra + "\" does not exist")
+			push_warning("KProperty \"" + extra + "\" does not exist")
+		KuriakutoWarns.KURIAKUTO_VALUE_DOESNT_EXIST:
+			push_warning("KValue \"" + extra + "\" does not exist")
+		KuriakutoWarns.KURIAKUTO_COMPUTED_DOESNT_EXIST:
+			push_warning("KComputed \"" + extra + "\" does not exist")
 		KuriakutoWarns.KURIAKUTO_OBSERVABLE_DOESNT_EXIST:
 			push_warning("Observable \"" + extra + "\" does not exist")
 			
