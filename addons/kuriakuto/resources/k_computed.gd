@@ -1,7 +1,6 @@
 class_name KComputed
-## Kuriakuto reactive value[br]
-## The value of KuriakutoComputed is the result of its given callable[br]
-## Specially useful when pre-computing complex values[br]
+## The value of KuriakutoComputed is the result of its given callable.
+## Specially useful when pre-computing complex values.
 ##
 ## [codeblock]
 ## @onready var health : int = 100

@@ -4,7 +4,7 @@ extends KResource
 signal value_changed
 
 # Private
-var _property_name : String
+var _kuriakuto_property_name : String
 
 # Public
 var value : Variant : 
@@ -13,6 +13,11 @@ var value : Variant :
 		emit_signal("value_changed")
 	get:
 		return value
-		
+
+func _init(name : String, value : Variant) -> void:
+	self._kuriakuto_property_name = name
+	self.value = value
+	KuriakutoCore.register(self)
+	
 func get_kuriakuto_name() -> String:
-	return _property_name
+	return _kuriakuto_property_name
