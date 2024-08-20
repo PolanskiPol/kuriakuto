@@ -1,18 +1,45 @@
 # Kuriakuto for Godot 4.x
 ##### Made by Polanski
 
-Kuriakuto is a plugin for Godot to integrate reactivity in a similar fashion to JavaScript frameworks like Vue or React.
+Kuriakuto is a plugin for Godot to add reactivity in a similar fashion to Vue, a JavaScript framework with the same purpose.
 
-The aim of this project is to ease communication between variables and create reactivity to changes.
+## API Reference
 
-## How to use Kuriakuto
+#### (Singleton) KuriakutoCore
 
-### Installing
+Singleton to handle KResources and reactivity.
+
+**func sync(node : Node, property : String, kuriakuto_resource_name : String) -> void**
+
+Syncs the given node property with the given KResource. Each time that the
+
+#### (Class) KResource -> extends Resource**
+
+Base class for all Kuriakuto Resources that add reactivity and other functionality.
+
+
+#### (Class) KValue(name : String, value : Variant) -> extends KResource**
+
+Class to make reactive values. Values are not linked to any node property.
+
+
+#### (Class) KProperty(name : String, node : Node, property : String) -> extends KResource**
+
+Class to make reactive properties. Properties are linked to a node property.
+
+
+#### (Class) KComputed(name : String, value : Callable) -> extends KResource**
+
+Class to make computed values. Computed values don't add reactivity, instead they are calculated each time that they are read.
+
+
+
+## Installing Kuriakuto
 1. Download the latest release of Kuriakuto
 2. Add the "kuriakuto" folder inside "addons" into your project's "res://addons/"
 3. Go to your project settings and enable the Kuriakuto plugin
 
-### Usage
+## Using Kuriakuto
 IMPORTANT: Any reactive value declared with Kuriakuto **MUST** be declared inside the method _ready() or with the @ready tag.
 
 #### KuriakutoCore
