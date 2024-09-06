@@ -27,6 +27,7 @@ var value :
 func _init(name : String, value : Callable) -> void:
 	self._property_name = name
 	self._callable = value
+	kuriakuto_unique_id = (str(randi_range(1_000_000, 9_999_999)) + name).md5_text() + "_" + name
 	KuriakutoCore.register(self)
 
 func get_kuriakuto_name() -> String:

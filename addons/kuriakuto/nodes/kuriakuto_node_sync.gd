@@ -1,6 +1,5 @@
 class_name KuriakutoNodeSync
 ## Kuriakuto Node to sync Kuriakuto values to properties without the need of code.
-##
 ## Place a KuriakutoNodeSync Node as child of the Node that will be synced and configure [member kuriakuto_property] and [member node_property].
 ## The sync will automatically end once the parent node is destroyed.
 extends Node

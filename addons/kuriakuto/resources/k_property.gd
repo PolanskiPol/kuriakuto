@@ -21,6 +21,7 @@ func _init(name : String, node : Node, property : String) -> void:
 	self._node = node
 	self._node_property_name = property
 	self.value = node.get(property)
+	kuriakuto_unique_id = (str(randi_range(1_000_000, 9_999_999)) + name).md5_text() + "_" + name
 	KuriakutoCore.register(self)
 	
 func get_kuriakuto_name() -> String:
