@@ -34,7 +34,9 @@ func _warn(error : KuriakutoWarns, extra : Variant = null) -> void:
 			push_warning("Observable \"" + extra + "\" already exists")
 			
 func _get_sync_uid(node : Node, property : StringName, kuriakuto_resource_name : StringName) -> StringName:
-	return node.name + "_" + property + "_" + get_kuriakuto_resource(kuriakuto_resource_name).kuriakuto_unique_id
+	var kresource : KResource = await get_kuriakuto_resource(kuriakuto_resource_name)
+	return node.name + "_" + property + "_" + kresource.kuriakuto_unique_id
+			
 			
 			
 ## Register a new KuriakutoResource, available for global use.
@@ -66,7 +68,9 @@ func get_value(kuriakuto_resource_name : StringName) -> Variant:
 	
 ## Return (by name) a registered KuriakutoResource.
 func get_kuriakuto_resource(kuriakuto_resource_name : StringName) -> KResource:
-	if(!_kuriakuto_resources.has(kuriakuto_resource_name)) : return null
+	if(!_kuriakuto_resources.has(kuriakuto_resource_name)):
+		await kuriakuto_resource_added
+		get_kuriakuto_resource(kuriakuto_resource_name)
 	return _kuriakuto_resources[kuriakuto_resource_name]
 	
 ## Return all the KuriakutoResources that are registered.
@@ -76,7 +80,7 @@ func get_kuriakuto_resources() -> Dictionary:
 ## Sync a KuriakutoResource (by name) to a node property.
 ## Every change to the KuriakutoResource's value will be reflected on the node's property.
 func sync(node : Node, property : StringName, kuriakuto_resource_name : StringName) -> void:
-	var uid : StringName = _get_sync_uid(node, property, kuriakuto_resource_name)
+	var uid : StringName = await _get_sync_uid(node, property, kuriakuto_resource_name)
 	if(_observables.has(uid)): 
 		_warn(KuriakutoWarns.KURIAKUTO_OBSERVABLE_DOESNT_EXIST, uid)
 		return
@@ -98,11 +102,11 @@ func sync(node : Node, property : StringName, kuriakuto_resource_name : StringNa
 
 ## Returns if KuriakutoResource (by name) is in sync.
 func is_synced(node : Node, property : StringName, kuriakuto_resource_name : StringName) -> void:
-	return _observables.has(_get_sync_uid(node, property, kuriakuto_resource_name))
+	return _observables.has(await _get_sync_uid(node, property, kuriakuto_resource_name))
 	
 ## Desyncs a KuriakutoResource (by name) to a node property.
 func desync(node : Node, property : StringName, kuriakuto_resource_name : StringName) -> void:
-	var uid : StringName = _get_sync_uid(node, property, kuriakuto_resource_name)
+	var uid : StringName = await _get_sync_uid(node, property, kuriakuto_resource_name)
 	if(!_kuriakuto_resources.has(kuriakuto_resource_name)): 
 		_warn(KuriakutoWarns.KURIAKUTO_PROPERTY_DOESNT_EXIST, kuriakuto_resource_name)
 		return

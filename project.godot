@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="kuriakuto"
-config/features=PackedStringArray("4.2", "GL Compatibility")
+config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 KuriakutoCore="*res://addons/kuriakuto/kuriakuto_core.gd"
 KPD="*res://addons/kuriakuto/kuriakuto_project_dict.gd"
+KD="*res://_kuriakuto/kuriakuto_dict.gd"
 
 [editor_plugins]
 
